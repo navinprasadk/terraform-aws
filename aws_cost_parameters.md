@@ -2,6 +2,8 @@
 
 This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
+--------------
+
 ## Block Level Mapping (Many to One Relationship)
  
 > Due to time constraints, mentioned only one resource block of terraform to AWS service 
@@ -13,7 +15,7 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 |[aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | VPC|
 | [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | RDS |
 
-
+--------------
 
 ### Block Level Cost Parameters
 
@@ -38,11 +40,24 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
   1. Data Transfer
 
+--------------
+
 #### aws_s3_bucket -> AWS S3
+
+In - Progress
+
+--------------
 
 #### aws_vpc -> AWS VPC
 
+In - Progress
+
+--------------
+
 #### aws_db_instance -> AWS RDS
 
+In - Progress
+
+--------------
 
 

@@ -22,19 +22,20 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 #### aws_instance -> AWS EC2
 
  1. ami (cost)
- 2. associate_public_ip_address (not sure)
- 3. availability_zone (not sure)
- 4. ebs_block_device (cost)
+ 2. ebs_block_device (cost)
     - iops
     - throughput
     - volume_size
     - volume_type
- 5. instance_type (cost)
- 6. root_block_device (cost)
+ 3. instance_type (cost)
+ 4. root_block_device (cost)
     - iops
     - throughput
     - volume_size
     - volume_type
+ 5. ~~associate_public_ip_address~~
+ 6. ~~availability_zone~~
+ 
 
   ##### Missing Cost Parameter from Terraform Resource Block - aws_instance
 

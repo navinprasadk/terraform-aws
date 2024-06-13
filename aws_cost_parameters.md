@@ -58,7 +58,7 @@ Consumption charges
 
 #### aws_vpc
 
-No fixed or consumption-based cost for aws_vpc resource block
+No fixed or consumption-based cost for the aws_vpc resource block
 
 --------------
 

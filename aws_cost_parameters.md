@@ -2,7 +2,7 @@
 
 This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
-## High Level Mapping (Many to One Relationship)
+## Block Level Mapping (Many to One Relationship)
  
 > Due to time constraint, mentioned only one resource block of terraform to AWS service 
 
@@ -13,7 +13,10 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 |[aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | VPC|
 | [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | RDS |
 
-### aws_instance -> AWS EC2
+
+
+### Block Level Cost Parameters
+aws_instance -> AWS EC2
 
  1. ami (cost)
  2. associate_public_ip_address (not sure)

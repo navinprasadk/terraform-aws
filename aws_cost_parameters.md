@@ -32,4 +32,4 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 #### Missing Cost Parameter from Terraform Resource Block - aws_instance
 
-    Data Transfer
+   Data Transfer

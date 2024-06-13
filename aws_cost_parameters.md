@@ -19,17 +19,17 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 ### Block Level Cost Parameters
 
-#### aws_instance -> AWS EC2
+#### aws_instance
 
  1. ami (cost)
  2. ebs_block_device (cost)
-    - iops
+    - IOPS
     - throughput
     - volume_size
     - volume_type
  3. instance_type (cost)
  4. root_block_device (cost)
-    - iops
+    - IOPS
     - throughput
     - volume_size
     - volume_type
@@ -43,19 +43,26 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 --------------
 
-#### aws_s3_bucket -> AWS S3
+#### aws_s3_bucket
 
-In - Progress
+From the aws_s3_bucket resource block, none of the parameters are required for cost estimation.
+
+
+Fixed charges
+  NIL
+
+Consumption charges
+ 1. Storage Size
 
 --------------
 
-#### aws_vpc -> AWS VPC
+#### aws_vpc
 
-In - Progress
+No fixed or consumption-based cost for aws_vpc resource block
 
 --------------
 
-#### aws_db_instance -> AWS RDS
+#### aws_db_instance
 
 In - Progress
 

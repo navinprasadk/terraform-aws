@@ -4,7 +4,7 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 ## Block Level Mapping (Many to One Relationship)
  
-> Due to time constraint, mentioned only one resource block of terraform to AWS service 
+> Due to time constraints, mentioned only one resource block of terraform to AWS service 
 
 | Resource Block | AWS Service|
 |----------------|------------|
@@ -16,7 +16,8 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 
 ### Block Level Cost Parameters
-aws_instance -> AWS EC2
+
+#### aws_instance -> AWS EC2
 
  1. ami (cost)
  2. associate_public_ip_address (not sure)
@@ -33,6 +34,15 @@ aws_instance -> AWS EC2
     - volume_size
     - volume_type
 
-#### Missing Cost Parameter from Terraform Resource Block - aws_instance
+  ##### Missing Cost Parameter from Terraform Resource Block - aws_instance
 
-   Data Transfer
+  1. Data Transfer
+
+#### aws_s3_bucket -> AWS S3
+
+#### aws_vpc -> AWS VPC
+
+#### aws_db_instance -> AWS RDS
+
+
+

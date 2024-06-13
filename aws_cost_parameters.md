@@ -51,7 +51,7 @@ From the aws_s3_bucket resource block, none of the parameters are required for c
 Fixed charges
   NIL
 
-Consumption charges
+Consumption-based charges
  1. Storage Size
 
 --------------

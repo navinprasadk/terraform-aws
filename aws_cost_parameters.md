@@ -8,10 +8,10 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 | Resource Block | AWS Service|
 |----------------|------------|
-|aws_instance  |EC2|
-|aws_s3_bucket | S3|
-|aws_vpc | VPC|
-| aws_db_instance | RDS |
+|[aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)  |EC2|
+|[aws_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | S3|
+|[aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | VPC|
+| [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | RDS |
 
 ### aws_instance -> AWS EC2
 

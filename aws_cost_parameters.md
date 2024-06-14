@@ -45,12 +45,12 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
  ##### EC2 and EBS Storage Cost Calculations
 
- 1. EC2 Cost = No. of EC2 instances x  hourly cost x 730 hours in a month
- 
- 2. EBS Storage Cost = Storage Size x 1.00 instance months x Unit cost
+ 1. EC2 Cost = No. of EC2 instances x hourly cost x Running hours in a month
+ 2. EBS Storage Cost = Storage Size x instance months x hourly cost
     (instance months = total EC2 running hours / 730 hours in a month)
 
- > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
+
+ > For O1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 --------------
 
 #### aws_s3_bucket
@@ -68,6 +68,34 @@ Consumption-based charges
 
 #### aws_db_instance
 
+allocated_storage 
+backup_retention_period 
+instance_class 
+iops 
+
+max_allocated_storage 
+monitoring_interval 
+multi_az 
+network_type 
+performance_insights_enabled 
+performance_insights_retention_period 
+replica_mode 
+replicate_source_db 
+s3_import 
+storage_type 
+
+
+##### RDS Calculations
+
+Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage 
+
+> Utilisation percentage = total EC2 running hours / 730 hours in a month
+
+Storage Cost 
+    For GP2, GP3 Storage cost = storage amount * no of instance * hourly cost
+    For IO1, IO2 Storage cost = IOPS * No. of instance * hourly cost
+
+We are not cansidering the following cost: RDS proxy cost, Dedicated log volume, Performance Insights, Extended Support, Backup Storage and Snapshot Export.
 
 --------------
 

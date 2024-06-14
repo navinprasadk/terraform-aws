@@ -58,7 +58,7 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
     |unit pricing column|terraform param| sample  value|
     |----------------|-----------|-------|
-    |Operation|OS|RHEL|
+    |Operation|-|RHEL|
     |Usage Description|instance_type|t2.micro|
 
 2. EBS Storage Cost

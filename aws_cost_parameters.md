@@ -198,8 +198,7 @@ Consumption-based charges
 
 2. Storage Cost
 
-    |unit pricing column|terraform param|query| sample  value|
-    |----------------|-----------|---|----|
+ 
 
 
 3. Dedicated Log Volume Cost (only for IO1, IO2)
@@ -212,11 +211,14 @@ Consumption-based charges
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:ChargedBackupUsage|
 
 5. Snapshot Export
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
+    |operation|-|-|MYSQL|
+    |Subcategory|-|-|RDS:SnapshotExportToS3|
     
 
 --------------

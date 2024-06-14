@@ -200,27 +200,24 @@ Consumption-based charges
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
-    |operation|-|-|putobject|
-    |Usage Description|-|-|Requests-Tier1|
+
 
 3. Dedicated Log Volume Cost (only for IO1, IO2)
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
-    |operation|-|-|getobject|
-    |Usage Description|-|-|Requests-Tier2|
+    
 
 4. Backup Storage Cost
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
-    |Subcategory|-|-|Select-Returned-Bytes|
 
 5. Snapshot Export
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
-    |Subcategory|-|-|Select-Scanned-Bytes|
+    
 
 --------------
 

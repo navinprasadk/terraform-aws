@@ -26,7 +26,7 @@ resource "aws_instance" "web" {
     volume_size = 20
     delete_on_termination = true
   }
-  
+
   tags = {
     Name = "WebServer"
   }
@@ -49,42 +49,3 @@ resource "aws_db_instance" "default" {
   }
 }
 
-# Create an ElastiCache cluster
-resource "aws_elasticache_cluster" "cache" {
-  cluster_id           = "my-cache-cluster"
-  engine               = "redis"
-  node_type            = "cache.t2.micro"
-  num_cache_nodes      = 1
-  parameter_group_name = "default.redis3.2"
-
-  tags = {
-    Name = "MyCacheCluster"
-  }
-}
-
-# Create an Elastic Load Balancer
-resource "aws_elb" "web" {
-  name               = "my-elb"
-  availability_zones = ["us-east-1a", "us-east-1b"]
-
-  listener {
-    instance_port     = 80
-    instance_protocol = "HTTP"
-    lb_port           = 80
-    lb_protocol       = "HTTP"
-  }
-
-  instances = [aws_instance.web.id]
-
-  health_check {
-    target              = "HTTP:80/"
-    interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-  }
-
-  tags = {
-    Name = "MyELB"
-  }
-}

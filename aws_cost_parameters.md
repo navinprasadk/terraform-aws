@@ -47,8 +47,10 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
     1. EC2 Cost = No. of EC2 instances x hourly cost x Running hours in a month
     2. EBS Storage Cost = Storage Size x instance months x hourly cost
-        (instance months = running hours in a month / 730 hours in a month)
-
+        (or)
+        Storage Size x monthly cost
+    
+    > instance months = running hours in a month / 730 hours in a month
     > Assume the vlaues for following parameters: Running hours in a month and Storage Size
     > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 
@@ -56,19 +58,19 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 1. EC2 Cost
 
-    |unit pricing column|terraform param| sample  value|
-    |----------------|-----------|-------|
-    |Operation|-|RHEL|
-    |Usage Description|instance_type|t2.micro|
+    |unit pricing column|terraform param|query |sample  value|
+    |----------------|-----------|---|-------|
+    |Operation|-|-|RHEL|
+    |Subcategory|instance_type|BoxUsage:<instance_type>|BoxUsage:t2.micro|
 
 2. EBS Storage Cost
 
-    |unit pricing column|terraform param| sample  value|
-    |----------------|-----------|-------|
-    |Subcategory|-|EBS Volumes|
-    |Usage Description|volume_type|gp2|
+    |unit pricing column|terraform param| query |sample  value|
+    |----------------|-----------|-------|-----|
+    |Subcategory|-|-|EBS Volumes|
+    |Usage Description|volume_type|EBS:VolumeUsage.<volume_type>|EBS:VolumeUsage.gp2|
 
-    for volume_type as gp3, include the remaining two charges using IOPS and throughput  values
+    > for volume_type as gp3, include the remaining two charges using IOPS and throughput  values
 
 --------------
 
@@ -101,8 +103,37 @@ Consumption-based charges
 
 ##### Unit Pricing for S3 Standard
 
-    |unit pricing column|terraform param| sample  value|
-    |----------------|-----------|-------|
+1. Tier cost
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|standardstorage|
+
+2. PUT, COPY, POST or LIST requests to S3 Standard
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|putobject|
+    |Usage Description|-|-|Requests-Tier1|
+
+3. GET, SELECT, and all other requests from S3 Standard
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|getobject|
+    |Usage Description|-|-|Requests-Tier2|
+
+4. Data returned by S3 Select
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Subcategory|-|-|Select-Returned-Bytes|
+
+5. Data scanned by S3 Select
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Subcategory|-|-|Select-Scanned-Bytes|
 
 --------------
 

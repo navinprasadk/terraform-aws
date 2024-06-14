@@ -14,7 +14,7 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 |[aws_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | S3|
 | [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | RDS |
 |[aws_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb)| Load Balancer |
-|[aws_elasticache_cluster]https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster| Elasticache|
+|[aws_elasticache_cluster](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster)| Elasticache|
 
 --------------
 

@@ -12,8 +12,9 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 |----------------|------------|
 |[aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance)  |EC2|
 |[aws_s3_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | S3|
-|[aws_vpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc) | VPC|
 | [aws_db_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance) | RDS |
+|[aws_lb](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb)| Load Balancer |
+|[aws_elasticache_cluster]https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/elasticache_cluster| Elasticache|
 
 --------------
 
@@ -21,18 +22,18 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 #### aws_instance
 
- 1. ami (cost)
- 2. ebs_block_device (cost)
-    - IOPS
-    - throughput
-    - volume_size
-    - volume_type
- 3. instance_type (cost)
- 4. root_block_device (cost)
-    - IOPS
-    - throughput
-    - volume_size
-    - volume_type
+ 1. ami - either hardcoded value or aws_instance.<resource_label>.ami (Mandatory)
+ 2. ebs_block_device 
+    - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
+    - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
+    - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Mandatory)
+    - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Mandatory)
+ 3. instance_type - aws_instance.<resource_label>.instance_type (Mandatory)
+ 4. root_block_device (Mandatory)
+    - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
+    - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
+    - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Mandatory)
+    - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Mandatory)
  5. ~~associate_public_ip_address~~
  6. ~~availability_zone~~
  
@@ -56,16 +57,14 @@ Consumption-based charges
 
 --------------
 
-#### aws_vpc
-
-No fixed or consumption-based cost for the aws_vpc resource block
-
---------------
-
 #### aws_db_instance
 
-In - Progress
 
 --------------
 
+#### aws_lb
 
+
+--------------
+
+#### aws_elasticache_cluster

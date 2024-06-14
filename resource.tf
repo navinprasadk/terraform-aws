@@ -2,31 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-# Create a VPC
-resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
-}
-
-# Create a security group
-resource "aws_security_group" "allow_ssh" {
-  name_prefix = "allow_ssh"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 # Create an S3 bucket
 resource "aws_s3_bucket" "bucket" {
   bucket = "my-unique-bucket-name-2024"
@@ -34,10 +9,24 @@ resource "aws_s3_bucket" "bucket" {
 
 # Create an EC2 instance
 resource "aws_instance" "web" {
-  ami             = "ami-0c55b159cbfafe1f0" # Amazon Linux 2 AMI
-  instance_type   = "t2.micro"
-  security_groups = [aws_security_group.allow_ssh.name]
+  ami           = "ami-0c55b159cbfafe1f0" # Amazon Linux 2 AMI
+  instance_type = "t2.micro"
 
+# Root Block Device (EBS)
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = 8
+    delete_on_termination = true
+  }
+
+  # Additional EBS Block Devices
+  ebs_block_device {
+    device_name = "/dev/sdh"
+    volume_type = "gp2"
+    volume_size = 20
+    delete_on_termination = true
+  }
+  
   tags = {
     Name = "WebServer"
   }
@@ -54,6 +43,48 @@ resource "aws_db_instance" "default" {
   password             = "password123"
   parameter_group_name = "default.mysql8.0"
   skip_final_snapshot  = true
-  vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+
+  tags = {
+    Name = "MyDBInstance"
+  }
 }
 
+# Create an ElastiCache cluster
+resource "aws_elasticache_cluster" "cache" {
+  cluster_id           = "my-cache-cluster"
+  engine               = "redis"
+  node_type            = "cache.t2.micro"
+  num_cache_nodes      = 1
+  parameter_group_name = "default.redis3.2"
+
+  tags = {
+    Name = "MyCacheCluster"
+  }
+}
+
+# Create an Elastic Load Balancer
+resource "aws_elb" "web" {
+  name               = "my-elb"
+  availability_zones = ["us-east-1a", "us-east-1b"]
+
+  listener {
+    instance_port     = 80
+    instance_protocol = "HTTP"
+    lb_port           = 80
+    lb_protocol       = "HTTP"
+  }
+
+  instances = [aws_instance.web.id]
+
+  health_check {
+    target              = "HTTP:80/"
+    interval            = 30
+    timeout             = 5
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+
+  tags = {
+    Name = "MyELB"
+  }
+}

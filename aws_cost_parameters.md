@@ -52,6 +52,24 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
     > Assume the vlaues for following parameters: Running hours in a month and Storage Size
     > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 
+##### Unit Pricing for EC2
+
+1. EC2 Cost
+
+    |unit pricing column|terraform param| sample  value|
+    |----------------|-----------|-------|
+    |Operation|OS|RHEL|
+    |Usage Description|instance_type|t2.micro|
+
+2. EBS Storage Cost
+
+    |unit pricing column|terraform param| sample  value|
+    |----------------|-----------|-------|
+    |Subcategory|-|EBS Volumes|
+    |Usage Description|volume_type|gp2|
+
+    for volume_type as gp3, include the remaining two charges using IOPS and throughput  values
+
 --------------
 
 #### aws_s3_bucket
@@ -80,6 +98,11 @@ Consumption-based charges
     > Assume the values for following parameters: No. of requests, Volume of data returned by S3 Select GB and Volume of data scanned by S3 Select GB
 
     > The above S3 Calculation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
+
+##### Unit Pricing for S3 Standard
+
+    |unit pricing column|terraform param| sample  value|
+    |----------------|-----------|-------|
 
 --------------
 

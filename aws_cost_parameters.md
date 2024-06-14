@@ -64,20 +64,35 @@ Fixed charges
 Consumption-based charges
  1. Storage Size
 
+##### S3 Standard Cost Calculation
+
+    1. Tier cost 
+        S3 Standard storage * hourly cost
+    2. PUT, COPY, POST or LIST requests to S3 Standard
+        No. of requests * hourly cost
+    3. GET, SELECT, and all other requests from S3 Standard
+        No. of requests * hourly cost
+    4. Data returned by S3 Select
+        Volume of data returned by S3 Select GB * hourly cost
+    5. Data scanned by S3 Select
+        Volume of data scanned by S3 Select GB * hourly cost
+
+> The above S3 Calculaation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
 --------------
 
 #### aws_db_instance
 
 
-allocated_storage  
-max_allocated_storage  
-engine
-engine_version
-instance_class 
-iops 
-multi_az 
-storage_type 
+1. allocated_storage  
+2. max_allocated_storage  
+3. engine
+4. engine_version
+5. instance_class 
+6. iops 
+7. multi_az 
+8. storage_type 
 
+>  For storage autoscaling, we can use the following terraform parameters: allocated_storage and max_allocated_storage 
 
 ##### RDS Calculations
 
@@ -87,20 +102,22 @@ storage_type
 
 2. Storage Cost
 
-    For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
-    For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
+    - For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
+    - For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
 
 3. Dedicated Log Volume Cost (only for IO1, IO2)
 
-    1000 GB x hourly cost
-    3000 Provisioned IOPS x hourly cost
+    - 1000 GB x hourly cost
+    - 3000 Provisioned IOPS x hourly cost
 
     > Dedicated Log Volumes are priced the same as a data volume with 1,000 GiB and 3,000 IOPS and by storage type
 
 4. Backup Storage Cost
+
     Backup storage size GB * hourly cost
 
 5. Snapshot Export
+
     Size of Backup Processed for Export GB * hourly cost
 
 > We are not cansidering the following cost: Performance Insights, and Extended Support 

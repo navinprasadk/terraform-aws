@@ -207,19 +207,28 @@ Consumption-based charges
 
     For IO1,
 
-    |unit pricing column|terraform param|query| sample  value|
-    |----------------|-----------|---|----|
-    |Usage Description|-|-|RDS:PIOPS|
+    Storage Cost
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
     |Usage Description|-|-|RDS:PIOPS-Storage|
 
+    IOPS Cost
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:PIOPS|
+
+
     For IO2,
+
+    Storage Cost
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|
     |Usage Description|-|-|RDS:PIOPS-Storage-IO2|
+
+    IOPS Cost
 
     |unit pricing column|terraform param|query| sample  value|
     |----------------|-----------|---|----|

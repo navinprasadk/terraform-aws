@@ -158,9 +158,11 @@ Consumption-based charges
 
     2. Storage Cost
 
-        - For GP2, GP3 Storage cost = storage size GB * no of instances * hourly cost
-        - For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
-
+        - For GP2 Storage cost = storage size GB * no of instances * hourly cost
+        - For IO1, I02 Storage cost 
+            - Storage cost = storage size GB * no of instances * hourly cost
+            - IOPS Cost= IOPS * No. of instances * hourly cost
+        
         > Assume the values for storage size GB
 
     3. Dedicated Log Volume Cost (only for IO1, IO2)
@@ -184,7 +186,6 @@ Consumption-based charges
 
     > We are not cansidering the following cost: Performance Insights, and Extended Support 
 
-
 ##### Unit Pricing for RDS MySQL
 
 1. Instance Cost
@@ -198,14 +199,39 @@ Consumption-based charges
 
 2. Storage Cost
 
- 
+    For GP2,
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:GP2-Storage|
+
+    For IO1,
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:PIOPS|
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:PIOPS-Storage|
+
+    For IO2,
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:PIOPS-Storage-IO2|
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Usage Description|-|-|RDS:IO2-PIOPS|
 
 
 3. Dedicated Log Volume Cost (only for IO1, IO2)
 
-    |unit pricing column|terraform param|query| sample  value|
+    |unit pricing column | terraform param | query | sample  value |
     |----------------|-----------|---|----|
-    
+
+    > Unit pricing details not available for Dedicated Log Volume
 
 4. Backup Storage Cost
 
@@ -215,8 +241,8 @@ Consumption-based charges
 
 5. Snapshot Export
 
-    |unit pricing column|terraform param|query| sample  value|
-    |----------------|-----------|---|----|
+    |unit pricing column | terraform param|query| sample  value|
+    |-------------------|-----------|---|----|
     |operation|-|-|MYSQL|
     |Subcategory|-|-|RDS:SnapshotExportToS3|
     

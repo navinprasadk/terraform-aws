@@ -22,33 +22,34 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 #### aws_instance
 
- 1. ami - either hardcoded value or aws_instance.<resource_label>.ami (Mandatory)
- 2. ebs_block_device 
-    - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
-    - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
-    - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Mandatory)
-    - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Mandatory)
- 3. instance_type - aws_instance.<resource_label>.instance_type (Mandatory)
- 4. root_block_device (Mandatory)
-    - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
-    - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
-    - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Mandatory)
-    - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Mandatory)
- 5. ~~associate_public_ip_address~~
- 6. ~~availability_zone~~
+1. ami - either hardcoded value or aws_instance.<resource_label>.ami (Mandatory)
+2. ebs_block_device (optional)
+   - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
+   - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
+   - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Required if ebs_block_device is mentioned)
+   - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Required if ebs_block_device is mentioned)
+3. instance_type - aws_instance.<resource_label>.instance_type (Mandatory)
+4. root_block_device (Mandatory)
+   - IOPS - aws_instance.<resource_label>.root_block_device.iops (Only for GP3, io1, io2)
+   - throughput - aws_instance.<resource_label>.root_block_device.throughput (Only for GP3)
+   - volume_size - aws_instance.<resource_label>.root_block_device.volume_size (Mandatory)
+   - volume_type - aws_instance.<resource_label>.root_block_device.volume_type (Mandatory)
+5. ~~associate_public_ip_address~~
+6. ~~availability_zone~~
  
 
 ##### Missing Cost Parameter from Terraform Resource Block - aws_instance
 
-  1. Data Transfer
+1. Data Transfer
 
 
 ##### EC2 and EBS Storage Cost Calculation
 
     1. EC2 Cost = No. of EC2 instances x hourly cost x Running hours in a month
     2. EBS Storage Cost = Storage Size x instance months x hourly cost
-        (instance months = total EC2 running hours / 730 hours in a month)
+        (instance months = running hours in a month / 730 hours in a month)
 
+    > Assume the vlaues for following parameters: Running hours in a month and Storage Size
     > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 
 --------------
@@ -76,25 +77,26 @@ Consumption-based charges
     5. Data scanned by S3 Select
         Volume of data scanned by S3 Select GB * hourly cost
 
-> The above S3 Calculation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
+    > Assume the values for following parameters: No. of requests, Volume of data returned by S3 Select GB and Volume of data scanned by S3 Select GB
+
+    > The above S3 Calculation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
 
 --------------
 
 #### aws_db_instance
 
+1. engine
+2. engine_version
+3. instance_class
+4. iops
+5. multi_az
+6. storage_type
+7. ~~allocated_storage~~
+8. ~~max_allocated_storage~~
 
-1. allocated_storage  
-2. max_allocated_storage  
-3. engine
-4. engine_version
-5. instance_class 
-6. iops 
-7. multi_az 
-8. storage_type 
+> For storage autoscaling, we can use the following terraform parameters: allocated_storage and max_allocated_storage 
 
->  For storage autoscaling, we can use the following terraform parameters: allocated_storage and max_allocated_storage 
-
-##### RDS Calculations
+##### RDS MySQL Calculations
 
     1. Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage
 
@@ -102,8 +104,10 @@ Consumption-based charges
 
     2. Storage Cost
 
-        - For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
+        - For GP2, GP3 Storage cost = storage size GB * no of instances * hourly cost
         - For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
+
+        > Assume the values for storage size GB
 
     3. Dedicated Log Volume Cost (only for IO1, IO2)
 
@@ -116,9 +120,13 @@ Consumption-based charges
 
         Backup storage size GB * hourly cost
 
+        > Assume the values for Backup storage size GB
+
     5. Snapshot Export
 
         Size of Backup Processed for Export GB * hourly cost
+
+        > Assume the values for Size of Backup Processed for Export GB
 
     > We are not cansidering the following cost: Performance Insights, and Extended Support 
 

@@ -50,7 +50,7 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
  2. EBS Storage Cost = Storage Size x 1.00 instance months x Unit cost
     (instance months = total EC2 running hours / 730 hours in a month)
 
- > For O1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
+ > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 --------------
 
 #### aws_s3_bucket

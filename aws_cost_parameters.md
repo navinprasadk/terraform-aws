@@ -57,12 +57,11 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
 
 From the aws_s3_bucket resource block, none of the parameters are required for cost estimation.
 
-
 Fixed charges
-  NIL
+    - NIL
 
 Consumption-based charges
- 1. Storage Size
+    - Storage Size
 
 ##### S3 Standard Cost Calculation
 
@@ -77,7 +76,7 @@ Consumption-based charges
     5. Data scanned by S3 Select
         Volume of data scanned by S3 Select GB * hourly cost
 
-> The above S3 Calculaation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
+> The above S3 Calculation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
 
 --------------
 

@@ -38,19 +38,19 @@ This document is prepared with the help of AWS Terraform provider **v5.53.0**
  6. ~~availability_zone~~
  
 
-  ##### Missing Cost Parameter from Terraform Resource Block - aws_instance
+##### Missing Cost Parameter from Terraform Resource Block - aws_instance
 
   1. Data Transfer
 
 
- ##### EC2 and EBS Storage Cost Calculations
+##### EC2 and EBS Storage Cost Calculation
 
- 1. EC2 Cost = No. of EC2 instances x hourly cost x Running hours in a month
- 2. EBS Storage Cost = Storage Size x instance months x hourly cost
-    (instance months = total EC2 running hours / 730 hours in a month)
+    1. EC2 Cost = No. of EC2 instances x hourly cost x Running hours in a month
+    2. EBS Storage Cost = Storage Size x instance months x hourly cost
+        (instance months = total EC2 running hours / 730 hours in a month)
 
+    > For io1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 
- > For O1, GP2, GP3: Inaddition to EBS Storage cost, we have to calculate the transaction charges using IOPS and Throughput
 --------------
 
 #### aws_s3_bucket
@@ -78,6 +78,7 @@ Consumption-based charges
         Volume of data scanned by S3 Select GB * hourly cost
 
 > The above S3 Calculaation is for S3 Standard only. It doesn't include S3 Intelligent - Tiering, S3 Standard - Infrequent Access, S3 One Zone - Infrequent Access, S3 Glacier Flexible Retrieval, S3 Glacier Deep Archive, and S3 Glacier Instant Retrieval
+
 --------------
 
 #### aws_db_instance
@@ -96,31 +97,31 @@ Consumption-based charges
 
 ##### RDS Calculations
 
-1. Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage
+    1. Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage
 
-    > Utilisation percentage = total running hours / 730 hours in a month
+        > Utilisation percentage = total running hours / 730 hours in a month
 
-2. Storage Cost
+    2. Storage Cost
 
-    - For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
-    - For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
+        - For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
+        - For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
 
-3. Dedicated Log Volume Cost (only for IO1, IO2)
+    3. Dedicated Log Volume Cost (only for IO1, IO2)
 
-    - 1000 GB x hourly cost
-    - 3000 Provisioned IOPS x hourly cost
+        - 1000 GB x hourly cost
+        - 3000 Provisioned IOPS x hourly cost
 
-    > Dedicated Log Volumes are priced the same as a data volume with 1,000 GiB and 3,000 IOPS and by storage type
+        > Dedicated Log Volumes are priced the same as a data volume with 1,000 GiB and 3,000 IOPS and by storage type
 
-4. Backup Storage Cost
+    4. Backup Storage Cost
 
-    Backup storage size GB * hourly cost
+        Backup storage size GB * hourly cost
 
-5. Snapshot Export
+    5. Snapshot Export
 
-    Size of Backup Processed for Export GB * hourly cost
+        Size of Backup Processed for Export GB * hourly cost
 
-> We are not cansidering the following cost: Performance Insights, and Extended Support 
+    > We are not cansidering the following cost: Performance Insights, and Extended Support 
 
 --------------
 

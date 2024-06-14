@@ -68,34 +68,42 @@ Consumption-based charges
 
 #### aws_db_instance
 
-allocated_storage 
-backup_retention_period 
+
+allocated_storage  
+max_allocated_storage  
+engine
+engine_version
 instance_class 
 iops 
-
-max_allocated_storage 
-monitoring_interval 
 multi_az 
-network_type 
-performance_insights_enabled 
-performance_insights_retention_period 
-replica_mode 
-replicate_source_db 
-s3_import 
 storage_type 
 
 
 ##### RDS Calculations
 
-Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage 
+1. Instance Cost = No. of instances * hourly cost * 730 * Utilisation percentage
 
-> Utilisation percentage = total EC2 running hours / 730 hours in a month
+    > Utilisation percentage = total running hours / 730 hours in a month
 
-Storage Cost 
-    For GP2, GP3 Storage cost = storage amount * no of instance * hourly cost
-    For IO1, IO2 Storage cost = IOPS * No. of instance * hourly cost
+2. Storage Cost
 
-We are not cansidering the following cost: RDS proxy cost, Dedicated log volume, Performance Insights, Extended Support, Backup Storage and Snapshot Export.
+    For GP2, GP3 Storage cost = storage amount * no of instances * hourly cost
+    For IO1, IO2 Storage cost = IOPS * No. of instances * hourly cost
+
+3. Dedicated Log Volume Cost (only for IO1, IO2)
+
+    1000 GB x hourly cost
+    3000 Provisioned IOPS x hourly cost
+
+    > Dedicated Log Volumes are priced the same as a data volume with 1,000 GiB and 3,000 IOPS and by storage type
+
+4. Backup Storage Cost
+    Backup storage size GB * hourly cost
+
+5. Snapshot Export
+    Size of Backup Processed for Export GB * hourly cost
+
+> We are not cansidering the following cost: Performance Insights, and Extended Support 
 
 --------------
 

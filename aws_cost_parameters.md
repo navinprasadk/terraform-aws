@@ -184,6 +184,44 @@ Consumption-based charges
 
     > We are not cansidering the following cost: Performance Insights, and Extended Support 
 
+
+##### Unit Pricing for RDS MySQL
+
+1. Instance Cost
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|MYSQL|
+    |Subcategory|instance_class, multi_az |InstanceUsage:<instance_class> OR Multi-AZUsage:<instance_class>|InstanceUsage:db.t2.micro|
+
+    > if multi_az is enabled, then go with Multi-AZUsage:<instance_class> otherwise InstanceUsage:<instance_class>
+
+2. Storage Cost
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|putobject|
+    |Usage Description|-|-|Requests-Tier1|
+
+3. Dedicated Log Volume Cost (only for IO1, IO2)
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |operation|-|-|getobject|
+    |Usage Description|-|-|Requests-Tier2|
+
+4. Backup Storage Cost
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Subcategory|-|-|Select-Returned-Bytes|
+
+5. Snapshot Export
+
+    |unit pricing column|terraform param|query| sample  value|
+    |----------------|-----------|---|----|
+    |Subcategory|-|-|Select-Scanned-Bytes|
+
 --------------
 
 #### aws_lb
